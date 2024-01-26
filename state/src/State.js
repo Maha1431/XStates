@@ -141,7 +141,7 @@ function State() {
       </div>
       {selectedcity && (
         <h2 className="result">
-          You selected <span className="highlight">{selectedcity}</span>
+          You selected <span className="highlight">{selectedcity},</span>
           <span className="fade">
             {" "}
             {selectedState}, {selectedcountry}
