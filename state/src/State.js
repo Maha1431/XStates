@@ -125,7 +125,11 @@ function State() {
           </select>
         </label>
         </div>
-      {selectedcity && (<h2 className="result">You selected <span className="highlight">{selectedcity},</span><span className="fade">{" "}{selectedState},{selectedcountry}</span> </h2> )}
+      {selectedcity && (<h2 className="result">You selected <span className="highlight">{selectedcity}</span>
+      <span className="fade">
+      {" "}
+      {selectedState}, {selectedcountry}</span> 
+      </h2> )}
     </div>
   );
 }
