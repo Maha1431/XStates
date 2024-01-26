@@ -83,7 +83,7 @@ function State() {
 
   return (
     <div className="container" >
-      <h1>Select Loaction</h1>
+      <h1>Select Location</h1>
       <div className="box">
       <label>
         <select value={selectedcountry} onChange={handlecountryChange} className="dropdown">
