@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./state.css"
+import "./state.css";
 
 function State() {
   const [countries, setCountries] = useState([]);
@@ -15,20 +15,16 @@ function State() {
   }, []);
 
   useEffect(() => {
-    if(selectedcountry)
-    {
-    fetchStates(selectedcountry);
+    if (selectedcountry) {
+      fetchStates(selectedcountry);
     }
   }, [selectedcountry]);
 
   useEffect(() => {
-    if(selectedcountry && selectedState)
-    {
-    fetchCities(selectedcountry, selectedState);
+    if (selectedcountry && selectedState) {
+      fetchCities(selectedcountry, selectedState);
     }
   }, [selectedcountry, selectedState]);
-
-
 
   const fetchCountries = async () => {
     try {
@@ -56,10 +52,9 @@ function State() {
       const response = await axios.get(
         `https://crio-location-selector.onrender.com/country=${country}/state=${state}/cities`
       );
-   
 
       setCities(response.data);
-      console.log('data:', response.data)
+      console.log("data:", response.data);
     } catch (e) {
       console.log("error", e);
     }
@@ -69,12 +64,12 @@ function State() {
   const handlecountryChange = (e) => {
     setSelectedcountry(e.target.value);
     setselectedState("");
-    setSelectedcity('');
+    setSelectedcity("");
     setCities([]);
   };
   const handlestateChange = (e) => {
     setselectedState(e.target.value);
-    setSelectedcity('');
+    setSelectedcity("");
   };
 
   const handlecityChange = (e) => {
@@ -82,25 +77,38 @@ function State() {
   };
 
   return (
-    <div className="container" >
+    <div className="container">
       <h1>Select Location</h1>
       <div className="box">
-      <label>
-        <select value={selectedcountry} onChange={handlecountryChange} className="dropdown">
-          <option value="" disabled>Select country</option>
-          {countries.map((cn, idx) => {
-            return (
-              <option key={idx} value={cn}>
-                {cn}
-              </option>
-            );
-          })}
-        </select>
-      </label>
-   
         <label>
-          <select value={selectedState} onChange={handlestateChange} disabled={!selectedcountry} className="dropdown">
-            <option value="" disabled>Select state</option>
+          <select
+            value={selectedcountry}
+            onChange={handlecountryChange}
+            className="dropdown"
+          >
+            <option value="" disabled>
+              Select country
+            </option>
+            {countries.map((cn, idx) => {
+              return (
+                <option key={idx} value={cn}>
+                  {cn}
+                </option>
+              );
+            })}
+          </select>
+        </label>
+
+        <label>
+          <select
+            value={selectedState}
+            onChange={handlestateChange}
+            disabled={!selectedcountry}
+            className="dropdown"
+          >
+            <option value="" disabled>
+              Select state
+            </option>
             {states.map((st, idx) => {
               return (
                 <option key={idx} value={st}>
@@ -110,11 +118,17 @@ function State() {
             })}
           </select>
         </label>
-      
-      
+
         <label>
-          <select value={selectedcity} onChange={handlecityChange} disabled={!selectedState} className="dropdown">
-            <option value="" disabled>Select city</option>
+          <select
+            value={selectedcity}
+            onChange={handlecityChange}
+            disabled={!selectedState}
+            className="dropdown"
+          >
+            <option value="" disabled>
+              Select city
+            </option>
             {cities.map((city, idx) => {
               return (
                 <option key={idx} value={city}>
@@ -124,12 +138,16 @@ function State() {
             })}
           </select>
         </label>
-        </div>
-      {selectedcity && (<h2 className="result">You selected <span className="highlight">{selectedcity}</span>
-      <span className="fade">
-      {" "}
-      {selectedState}, {selectedcountry}</span> 
-      </h2> )}
+      </div>
+      {selectedcity && (
+        <h2 className="result">
+          You selected <span className="highlight">{selectedcity}</span>
+          <span className="fade">
+            {" "}
+            {selectedState}, {selectedcountry}
+          </span>
+        </h2>
+      )}
     </div>
   );
 }
